@@ -18,7 +18,7 @@
       "version": "detect"
     }
   },
-  "plugins": ["react", "import"],
+  "plugins": ["react"],
   "extends": ["eslint:recommended", "plugin:react/recommended", "react-app"],
   "rules": {
     "indent": ["error", 2, { "SwitchCase": 1 }],
