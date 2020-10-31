@@ -1,7 +1,9 @@
 {
   "name": "pizzeria-portal",
   "version": "0.1.0",
-  "private": true, "scripts": {
+  "private": true,
+  "homepage":"/panel",
+  "scripts": {
     "start": "run-p start:* ",
     "start-silent": "run-p start > /dev/null",
     "start:react": "react-scripts start",
