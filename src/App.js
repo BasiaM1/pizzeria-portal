@@ -39,13 +39,13 @@ function App() {
               <Route exact path={process.env.PUBLIC_URL + '/login'} component={Login} />
               <Route exact path={`${process.env.PUBLIC_URL}/waiter`} component={Waiter} />
               <Route exact path={`${process.env.PUBLIC_URL}/waiter/order/new`} component={NewOrder} />
-              <Route exact path={`${process.env.PUBLIC_URL}/waiter/order/:id`} component={Order} />
+              <Route exact path={`${process.env.PUBLIC_URL}/waiter/order/:orderId`} component={Order} />
               <Route exact path={`${process.env.PUBLIC_URL}/kitchen`} component={Kitchen} />
               <Route exact path={`${process.env.PUBLIC_URL}/tables`} component={Tables} />
               <Route exact path={`${process.env.PUBLIC_URL}/tables/booking/new`} component={NewBookingTable} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables/booking/:id`} component={BookedTable} />
+              <Route exact path={`${process.env.PUBLIC_URL}/tables/booking/:tableId`} component={BookedTable} />
               <Route exact path={`${process.env.PUBLIC_URL}/tables/event/new`} component={NewBookingEvent} />
-              <Route exact path={`${process.env.PUBLIC_URL}/tables/event/:id`} component={BookedEvent} />
+              <Route exact path={`${process.env.PUBLIC_URL}/tables/event/:eventId`} component={BookedEvent} />
             </Switch>
           </MainLayout>
         </ThemeProvider>
