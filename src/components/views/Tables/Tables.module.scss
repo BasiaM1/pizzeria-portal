@@ -3,3 +3,19 @@
 .component {
   padding: $base-size;
 }
+.buttons{
+  margin-bottom:20px;
+}
+.table{
+  margin-top:20px;
+  min-width:650px;
+
+.tablehead{
+
+  background-color:$main;
+  .title{
+    color:$text;
+  }
+}
+
+}
