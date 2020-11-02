@@ -1,15 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './Order.module.scss';
+import { useParams } from 'react-router-dom';
 
-const Order = ({ orderId }) => (
-  <div className={styles.component}>
-    <h2>Order view</h2>
-    {orderId}
-  </div>
-);
-Order.propTypes = {
-  orderId: PropTypes.string,
+const BookedTable = () => {
+  let { orderId } = useParams();
+
+  return (
+    <div className={styles.component}>
+      <h2>Order view</h2>
+
+      {orderId}
+    </div>
+  );
 };
-
 export default Order;
