@@ -1,16 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './BookedTable.module.scss';
+import { useParams } from 'react-router-dom';
 
-const BookedTable = ({ tableId }) => (
-  <div className={styles.component}>
-    <h2>BookedTable view</h2>
+const BookedTable = () => {
+  let { tableId } = useParams();
 
-    {tableId}
-  </div>
-);
-BookedTable.propTypes = {
-  tableId: PropTypes.string,
+  return (
+    <div className={styles.component}>
+      <h2>BookedTable view</h2>
+
+      {tableId}
+    </div>
+  );
 };
-
 export default BookedTable;
