@@ -1,4 +1,4 @@
-@import '../../../styles/settings.scss';
+@import '../../styles/settings.scss';
 
 .component {
   padding: $base-size;
@@ -18,5 +18,7 @@
 
 .select{
   min-width: 120px;
-
+}
+.phone{
+  margin-right:20px;
 }

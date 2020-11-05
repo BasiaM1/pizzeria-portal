@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from './NewBookingEvent.module.scss';
+import styles from './FormReservation.module.scss';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
-import EventOutlinedIcon from '@material-ui/icons/EventOutlined';
+import EventAvailableOutlinedIcon from '@material-ui/icons/EventAvailableOutlined';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -24,28 +24,27 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import Checkbox from '@material-ui/core/Checkbox';
+import PropTypes from 'prop-types';
 
-const NewBookingEvent = () => {
+const FormReservation = ({ title, label_id, id, dateTitle, hourTitle, ppl, phone, mail, displayBtn, flag }) => {
+
 
   const [table, setTable] = React.useState('');
-
   const handleChangeTable = (event) => {
     setTable(event.target.value);
   };
-  const [duration, setDuration] = React.useState('');
 
+  const [duration, setDuration] = React.useState('');
   const handleChangeDuration = (event) => {
     setDuration(event.target.value);
   };
 
   const [selectedDate, setSelectedDate] = React.useState(new Date());
-
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
   const [value, setValue] = React.useState('');
-
   const handleChangeRadio = (event) => {
     setValue(event.target.value);
   };
@@ -61,11 +60,11 @@ const NewBookingEvent = () => {
 
   return (
     <Paper className={styles.component}>
-      <Avatar className={styles.avatar} component={Link} to={`${process.env.PUBLIC_URL}/tables`}>
-        <EventOutlinedIcon />
+      <Avatar className={styles.avatar}>
+        <EventAvailableOutlinedIcon />
       </Avatar>
       <Typography variant="h5" component="h1" >
-        Add new event
+        {title}
       </Typography>
       <form className={styles.form} noValidate>
         <Grid item xs={6}>
@@ -74,11 +73,15 @@ const NewBookingEvent = () => {
             fullWidth
             margin="normal"
             id="id"
-            label="Event id"
+            label={label_id}
             name="id"
             autoComplete="id"
             autoFocus
             size="small"
+            defaultValue={id}
+            InputProps={{
+              readOnly: { flag },
+            }}
           />
         </Grid>
 
@@ -87,12 +90,16 @@ const NewBookingEvent = () => {
             <KeyboardDatePicker
               margin="normal"
               id="date-picker-dialog"
-              label="Event date"
+              label={dateTitle}
               format="dd/MM/yyyy"
               value={selectedDate}
               onChange={handleDateChange}
+              InputProps={{
+                readOnly: { flag },
+              }}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
+
               }}
             />
           </Grid>
@@ -100,9 +107,12 @@ const NewBookingEvent = () => {
             <KeyboardTimePicker
               margin="normal"
               id="time-picker"
-              label="Event time"
+              label={hourTitle}
               value={selectedDate}
               onChange={handleDateChange}
+              InputProps={{
+                readOnly: { flag },
+              }}
               KeyboardButtonProps={{
                 'aria-label': 'change time',
               }}
@@ -119,6 +129,9 @@ const NewBookingEvent = () => {
               value={table}
               onChange={handleChangeTable}
               label="Table"
+              InputProps={{
+                readOnly: { flag },
+              }}
             >
               <MenuItem value={1}>1</MenuItem>
               <MenuItem value={2}>2</MenuItem>
@@ -130,7 +143,9 @@ const NewBookingEvent = () => {
 
         <FormControl size="small" margin="normal" component="fieldset">
           <FormLabel component="legend">Repeat</FormLabel>
-          <RadioGroup aria-label="repeat" name="repeat" value={value} onChange={handleChangeRadio}>
+          <RadioGroup aria-label="repeat" name="repeat" value={value} onChange={handleChangeRadio} InputProps={{
+            readOnly: { flag },
+          }}>
             <FormControlLabel value="true" control={<Radio color="primary" />} label="Yes" />
             <FormControlLabel value="false" control={<Radio color="primary" />} label="No" />
           </RadioGroup>
@@ -144,6 +159,9 @@ const NewBookingEvent = () => {
               value={duration}
               onChange={handleChangeDuration}
               label="Duration"
+              InputProps={{
+                readOnly: { flag },
+              }}
             >
               <MenuItem value={1}>1</MenuItem>
               <MenuItem value={2}>2</MenuItem>
@@ -167,6 +185,10 @@ const NewBookingEvent = () => {
               shrink: true,
             }}
             variant="outlined"
+            defaultValue={ppl}
+            InputProps={{
+              readOnly: { flag },
+            }}
           />
         </Grid>
 
@@ -175,11 +197,15 @@ const NewBookingEvent = () => {
             <FormLabel component="legend">Starters</FormLabel>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox color="primary" checked={water} onChange={handleChangeStarter} name="water" />}
+                control={<Checkbox InputProps={{
+                  readOnly: { flag },
+                }} color="primary" checked={water} onChange={handleChangeStarter} name="water" />}
                 label="Water"
               />
               <FormControlLabel
-                control={<Checkbox color="primary" checked={bread} onChange={handleChangeStarter} name="bread" />}
+                control={<Checkbox InputProps={{
+                  readOnly: { flag },
+                }} color="primary" checked={bread} onChange={handleChangeStarter} name="bread" />}
                 label="Bread"
               />
             </FormGroup>
@@ -196,6 +222,10 @@ const NewBookingEvent = () => {
             autoComplete="phone"
             autoFocus
             size="small"
+            defaultValue={phone}
+            InputProps={{
+              readOnly: { flag },
+            }}
           />
 
           <TextField className={styles.textField}
@@ -208,21 +238,36 @@ const NewBookingEvent = () => {
             autoComplete="mail"
             autoFocus
             size="small"
+            defaultValue={mail}
+            InputProps={{
+              readOnly: { flag },
+            }}
           />
         </Grid>
-
         <Button
+          display={displayBtn}
           type="submit"
           fullWidth
           variant="contained"
           color="primary"
           component={Link} to={`${process.env.PUBLIC_URL}/tables`}>
-          Add event
+          Add reservation
         </Button>
       </form>
     </Paper>
   );
 };
+FormReservation.propTypes = {
+  title: PropTypes.string,
+  label_id: PropTypes.string,
+  id: PropTypes.string,
+  dateTitle: PropTypes.string,
+  hourTitle: PropTypes.string,
+  ppl: PropTypes.string,
+  phone: PropTypes.string,
+  mail: PropTypes.string,
+  displayBtn: PropTypes.string,
+  flag: PropTypes.bool,
+};
 
-
-export default NewBookingEvent;
+export default FormReservation;

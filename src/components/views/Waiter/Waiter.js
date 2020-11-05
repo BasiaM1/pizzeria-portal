@@ -55,13 +55,13 @@ const renderActions = status => {
 
 const Waiter = () => (
   <Paper className={styles.component}>
-    <Table>
+    <Table className={styles.table}>
       <TableHead>
-        <TableRow>
-          <TableCell>Table</TableCell>
-          <TableCell>Status</TableCell>
-          <TableCell>Order</TableCell>
-          <TableCell>Action</TableCell>
+        <TableRow className={styles.tablehead}>
+          <TableCell className={styles.title}>Table</TableCell>
+          <TableCell className={styles.title}>Status</TableCell>
+          <TableCell className={styles.title}>Order</TableCell>
+          <TableCell className={styles.title}>Action</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>

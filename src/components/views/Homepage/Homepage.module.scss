@@ -2,4 +2,24 @@
 
 .component {
   padding: $base-size;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title{
+  text-transform: uppercase;
+
+}
+.subtitle{
+  text-decoration: underline;
+}
+.table{
+  max-width:400px;
+  .tablehead{
+
+  background-color:$main;
+  .titletable{
+    color:$text;
+  }
+}
 }

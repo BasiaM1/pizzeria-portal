@@ -56,11 +56,10 @@ const Tables = () => {
       </ButtonGroup>
       <Grid container justify="space-around">
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-
           <KeyboardDatePicker
             margin="normal"
             id="date-picker-dialog"
-            label="Date picker dialog"
+            label="Date picker"
             format="dd/MM/yyyy"
             value={selectedDate}
             onChange={handleDateChange}
@@ -78,12 +77,11 @@ const Tables = () => {
               'aria-label': 'change time',
             }}
           />
-
         </MuiPickersUtilsProvider>
         <Table className={styles.table}>
           <TableHead>
             <TableRow className={styles.tablehead}>
-              <TableCell className={styles.title}>Table</TableCell>
+              <TableCell className={styles.title}>Time</TableCell>
               <TableCell className={styles.title}>Table1</TableCell>
               <TableCell className={styles.title}>Table2</TableCell>
               <TableCell className={styles.title}>Table3</TableCell>
@@ -97,32 +95,32 @@ const Tables = () => {
                   {row.time}
                 </TableCell>
                 <TableCell>
-                  {row.table1 && (
-                    <Button component={Link} to={`${process.env.PUBLIC_URL}/tables/booking/${row.table1}`}>
+                  {row.table1 ?
+                    (<Button component={Link} to={`${process.env.PUBLIC_URL}/tables/booking/${row.table1}`}>
                       {row.table1}
-                    </Button>
-                  )}
+                    </Button>) : (<Button component={Link} to={`${process.env.PUBLIC_URL}/tables/booking/new`}></Button>)
+                  }
                 </TableCell>
                 <TableCell>
-                  {row.table2 && (
-                    <Button component={Link} to={`${process.env.PUBLIC_URL}/tables/booking/${row.table2}`}>
+                  {row.table2 ?
+                    (<Button component={Link} to={`${process.env.PUBLIC_URL}/tables/booking/${row.table2}`}>
                       {row.table2}
-                    </Button>
-                  )}
+                    </Button>) : (<Button component={Link} to={`${process.env.PUBLIC_URL}/tables/booking/new`}></Button>)
+                  }
                 </TableCell>
                 <TableCell>
-                  {row.table3 && (
-                    <Button component={Link} to={`${process.env.PUBLIC_URL}/tables/booking/${row.table3}`}>
+                  {row.table3 ?
+                    (<Button component={Link} to={`${process.env.PUBLIC_URL}/tables/booking/${row.table3}`}>
                       {row.table3}
-                    </Button>
-                  )}
+                    </Button>) : (<Button component={Link} to={`${process.env.PUBLIC_URL}/tables/booking/new`}></Button>)
+                  }
                 </TableCell>
                 <TableCell>
-                  {row.table4 && (
-                    <Button component={Link} to={`${process.env.PUBLIC_URL}/tables/event/${row.table4}`}>
-                      {row.table4}
-                    </Button>
-                  )}
+                  {row.table4 ?
+                    (<Button component={Link} to={`${process.env.PUBLIC_URL}/tables/event/${row.table1}`}>
+                      {row.table1}
+                    </Button>) : (<Button component={Link} to={`${process.env.PUBLIC_URL}/tables/event/new`}></Button>)
+                  }
                 </TableCell>
               </TableRow>
             ))}

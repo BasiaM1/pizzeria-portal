@@ -2,4 +2,23 @@
 
 .component {
   padding: $base-size;
+  margin-top:20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+
+.avatar{
+  background:$main;
 }
+.table{
+  margin:20px 0;
+  max-width:300px;
+
+.tablehead{
+
+  background-color:$main;
+  .title{
+    color:$text;
+  }
+}}

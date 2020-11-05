@@ -3,3 +3,17 @@
 .component {
   padding: $base-size;
 }
+
+.table{
+  margin-top:20px;
+  min-width:650px;
+
+.tablehead{
+
+  background-color:$main;
+  .title{
+    color:$text;
+  }
+}
+
+}
