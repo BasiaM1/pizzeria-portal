@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './Waiter.module.scss';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,86 +9,111 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+class Waiter extends React.Component {
 
-const demoContent = [
-  { id: '1', status: 'free', order: null },
-  { id: '2', status: 'thinking', order: null },
-  { id: '3', status: 'ordered', order: 123 },
-  { id: '4', status: 'prepared', order: 234 },
-  { id: '5', status: 'delivered', order: 345 },
-  { id: '6', status: 'paid', order: 456 },
-];
-
-const renderActions = status => {
-  switch (status) {
-    case 'free':
-      return (
-        <>
-          <Button>thinking</Button>
-          <Button component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>new order</Button>
-        </>
-      );
-    case 'thinking':
-      return (
-        <Button component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>new order</Button>
-
-      );
-    case 'ordered':
-      return (
-        <Button>prepared</Button>
-      );
-    case 'prepared':
-      return (
-        <Button>delivered</Button>
-      );
-    case 'delivered':
-      return (
-        <Button>paid</Button>
-      );
-    case 'paid':
-      return (
-        <Button>free</Button>
-      );
-    default:
-      return null;
+  static propTypes = {
+    fetchTables: PropTypes.func,
+    fetchStatusUpdate: PropTypes.func,
+    loading: PropTypes.shape({
+      active: PropTypes.bool,
+      error: PropTypes.node,
+    }),
+    tables: PropTypes.object,
   }
-};
+  componentDidMount() {
+    const { fetchTables } = this.props;
+    fetchTables();
+  }
 
-const Waiter = () => (
-  <Paper className={styles.component}>
-    <Table className={styles.table}>
-      <TableHead>
-        <TableRow className={styles.tablehead}>
-          <TableCell className={styles.title}>Table</TableCell>
-          <TableCell className={styles.title}>Status</TableCell>
-          <TableCell className={styles.title}>Order</TableCell>
-          <TableCell className={styles.title}>Action</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {demoContent.map(row => (
-          <TableRow key={row.id}>
-            <TableCell component="th" scope="row">
-              {row.id}
-            </TableCell>
-            <TableCell>
-              {row.status}
-            </TableCell>
-            <TableCell>
-              {row.order && (
-                <Button component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/${row.order}`}>
-                  {row.order}
-                </Button>
-              )}
-            </TableCell>
-            <TableCell>
-              {renderActions(row.status)}
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </Paper>
-);
+  renderActions(status, id) {
+    const { fetchStatusUpdate } = this.props;
+    switch (status) {
+      case 'free':
+        return (
+          <>
+            <Button onClick={() => fetchStatusUpdate('thinking', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>thinking</Button>
+          </>
+        );
+      case 'thinking':
+        return (
+          <Button onClick={() => fetchStatusUpdate('new order', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>new order</Button>
+
+        );
+      case 'ordered':
+        return (
+          <Button onClick={() => fetchStatusUpdate('prepared', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/123`}>prepared</Button>
+        );
+      case 'prepared':
+        return (
+          <Button onClick={() => fetchStatusUpdate('delivered', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/567`}>delivered</Button>
+        );
+      case 'delivered':
+        return (
+          <Button onClick={() => fetchStatusUpdate('paid', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/567`}>paid</Button>
+        );
+      case 'paid':
+        return (
+          <Button onClick={() => fetchStatusUpdate('free', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/145`}>free</Button>
+        );
+      default:
+        return null;
+    }
+  }
+  render() {
+    const { loading: { active, error }, tables } = this.props;
+
+    if (active || !tables.length) {
+      return (
+        <Paper className={styles.component}>
+          <p>Loading...</p>
+        </Paper>
+      );
+    } else if (error) {
+      return (
+        <Paper className={styles.component}>
+          <p>Error! Details:</p>
+          <pre>{error}</pre>
+        </Paper>
+      );
+    } else {
+      return (
+        <Paper className={styles.component}>
+          <Table className={styles.table}>
+            <TableHead>
+              <TableRow className={styles.tablehead}>
+                <TableCell className={styles.title}>Table</TableCell>
+                <TableCell className={styles.title}>Status</TableCell>
+                <TableCell className={styles.title}>Order</TableCell>
+                <TableCell className={styles.title}>Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {tables.map(row => (
+                <TableRow key={row.id}>
+                  <TableCell component="th" scope="row">
+                    {row.id}
+                  </TableCell>
+                  <TableCell>
+                    {row.status}
+                  </TableCell>
+                  <TableCell>
+                    {row.order && (
+                      <Button component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/${row.order}`}>
+                        {row.order}
+                      </Button>
+                    )}
+                  </TableCell>
+                  <TableCell>
+                    {this.renderActions(row.status)}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Paper>
+      );
+    }
+  }
+}
 
 export default Waiter;

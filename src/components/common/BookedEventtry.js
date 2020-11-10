@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useParams } from 'react-router-dom';
-import FormReservation from '../../common/FormReservation';
+import FormReservation from './FormReservation';
 
 
 const BookedEvent = () => {
