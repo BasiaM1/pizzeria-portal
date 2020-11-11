@@ -5,7 +5,7 @@ import Homepage from './components/views/Homepage/Homepage';
 import Login from './components/views/Login/Login';
 import Kitchen from './components/views/Kitchen/Kitchen';
 import Order from './components/views/Order/Order';
-import WaiterContainer from './components/views/Waiter/Waiter';
+import Waiter from './components/views/Waiter/WaiterContainer';
 import Tables from './components/views/Tables/Tables';
 import NewOrder from './components/views/NewOrder/NewOrder';
 import NewBookingTable from './components/views/NewBookingTable/NewBookingTable';
@@ -40,7 +40,7 @@ function App() {
               <Switch>
                 <Route exact path={`${process.env.PUBLIC_URL}/`} component={Homepage} />
                 <Route exact path={process.env.PUBLIC_URL + '/login'} component={Login} />
-                <Route exact path={`${process.env.PUBLIC_URL}/waiter`} component={WaiterContainer} />
+                <Route exact path={`${process.env.PUBLIC_URL}/waiter`} component={Waiter} />
                 <Route exact path={`${process.env.PUBLIC_URL}/waiter/order/new`} component={NewOrder} />
                 <Route exact path={`${process.env.PUBLIC_URL}/waiter/order/:orderId`} component={Order} />
                 <Route exact path={`${process.env.PUBLIC_URL}/kitchen`} component={Kitchen} />
