@@ -31,29 +31,29 @@ class Waiter extends React.Component {
       case 'free':
         return (
           <>
-            <Button onClick={() => fetchStatusUpdate('thinking', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>thinking</Button>
+            <Button onClick={() => fetchStatusUpdate(id, 'thinking')} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>thinking</Button>
           </>
         );
       case 'thinking':
         return (
-          <Button onClick={() => fetchStatusUpdate('new order', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>new order</Button>
+          <Button onClick={() => fetchStatusUpdate(id, 'new order')} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/new`}>new order</Button>
 
         );
       case 'ordered':
         return (
-          <Button onClick={() => fetchStatusUpdate('prepared', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/123`}>prepared</Button>
+          <Button onClick={() => fetchStatusUpdate(id, 'prepared')} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/123`}>prepared</Button>
         );
       case 'prepared':
         return (
-          <Button onClick={() => fetchStatusUpdate('delivered', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/567`}>delivered</Button>
+          <Button onClick={() => fetchStatusUpdate(id, 'delivered')} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/567`}>delivered</Button>
         );
       case 'delivered':
         return (
-          <Button onClick={() => fetchStatusUpdate('paid', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/567`}>paid</Button>
+          <Button onClick={() => fetchStatusUpdate(id, 'paid')} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/567`}>paid</Button>
         );
       case 'paid':
         return (
-          <Button onClick={() => fetchStatusUpdate('free', id)} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/145`}>free</Button>
+          <Button onClick={() => fetchStatusUpdate(id, 'free')} component={Link} to={`${process.env.PUBLIC_URL}/waiter/order/145`}>free</Button>
         );
       default:
         return null;
